@@ -786,7 +786,7 @@ export function getContract<
  * @internal exporting for testing only
  */
 export function getFunctionParameters(
-  values: [args?: readonly unknown[], options?: object],
+  values: [args?: readonly unknown[] | undefined, options?: object | undefined],
 ) {
   const hasArgs = values.length && Array.isArray(values[0])
   const args = hasArgs ? values[0]! : []

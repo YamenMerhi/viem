@@ -42,6 +42,7 @@ import type {
   TransactionSerializable,
 } from '../../types/transaction.js'
 import type {
+  ExactPartial,
   IsNever,
   Prettify,
   UnionOmit,
@@ -156,7 +157,7 @@ export type PrepareTransactionRequestReturnType<
           : { account?: undefined; from?: undefined }),
       IsNever<_transactionRequest> extends true
         ? unknown
-        : Partial<_transactionRequest>
+        : ExactPartial<_transactionRequest>
     > & { chainId?: number },
     ParameterTypeToParameters<
       request['parameters'] extends PrepareTransactionRequestParameterType[]

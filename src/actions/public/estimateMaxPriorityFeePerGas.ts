@@ -73,12 +73,14 @@ export async function internal_estimateMaxPriorityFeePerGas<
 >(
   client: Client<Transport, chain>,
   args: EstimateMaxPriorityFeePerGasParameters<chain, chainOverride> & {
-    block?: Block
-    request?: PrepareTransactionRequestParameters<
-      chain,
-      Account | undefined,
-      chainOverride
-    >
+    block?: Block | undefined
+    request?:
+      | PrepareTransactionRequestParameters<
+          chain,
+          Account | undefined,
+          chainOverride
+        >
+      | undefined
   },
 ): Promise<EstimateMaxPriorityFeePerGasReturnType> {
   const { block: block_, chain = client.chain, request } = args || {}

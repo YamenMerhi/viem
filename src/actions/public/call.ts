@@ -44,7 +44,7 @@ import type {
 } from '../../types/rpc.js'
 import type { StateMapping, StateOverride } from '../../types/stateOverride.js'
 import type { TransactionRequest } from '../../types/transaction.js'
-import type { UnionOmit } from '../../types/utils.js'
+import type { ExactPartial, UnionOmit } from '../../types/utils.js'
 import {
   type DecodeFunctionResultErrorType,
   decodeFunctionResult,
@@ -90,12 +90,12 @@ export type FormattedCall<
 export type CallParameters<
   TChain extends Chain | undefined = Chain | undefined,
 > = UnionOmit<FormattedCall<TChain>, 'from'> & {
-  account?: Account | Address
-  batch?: boolean
+  account?: Account | Address | undefined
+  batch?: boolean | undefined
 } & (
     | {
         /** The balance of the account at a block number. */
-        blockNumber?: bigint
+        blockNumber?: bigint | undefined
         blockTag?: never
       }
     | {
@@ -104,10 +104,10 @@ export type CallParameters<
          * The balance of the account at a block tag.
          * @default 'latest'
          */
-        blockTag?: BlockTag
+        blockTag?: BlockTag | undefined
       }
   ) & {
-    stateOverride?: StateOverride
+    stateOverride?: StateOverride | undefined
   }
 
 export type CallReturnType = { data: Hex | undefined }
@@ -219,8 +219,12 @@ export async function call<TChain extends Chain | undefined>(
     const response = await client.request({
       method: 'eth_call',
       params: rpcStateOverride
-        ? [request as Partial<RpcTransactionRequest>, block, rpcStateOverride]
-        : [request as Partial<RpcTransactionRequest>, block],
+        ? [
+            request as ExactPartial<RpcTransactionRequest>,
+            block,
+            rpcStateOverride,
+          ]
+        : [request as ExactPartial<RpcTransactionRequest>, block],
     })
     if (response === '0x') return { data: undefined }
     return { data: response }

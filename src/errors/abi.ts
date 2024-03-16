@@ -273,7 +273,10 @@ export type AbiEventNotFoundErrorType = AbiEventNotFoundError & {
 }
 export class AbiEventNotFoundError extends BaseError {
   override name = 'AbiEventNotFoundError'
-  constructor(eventName?: string, { docsPath }: { docsPath?: string } = {}) {
+  constructor(
+    eventName?: string | undefined,
+    { docsPath }: { docsPath?: string | undefined } = {},
+  ) {
     super(
       [
         `Event ${eventName ? `"${eventName}" ` : ''}not found on ABI.`,

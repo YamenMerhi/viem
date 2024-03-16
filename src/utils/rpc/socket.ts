@@ -28,7 +28,7 @@ export type SocketRpcClient<socket extends {}> = {
   socket: Socket<socket>
   request(params: {
     body: RpcRequest
-    onError?: (error: Error) => void
+    onError?: ((error: Error) => void) | undefined
     onResponse: (message: RpcResponse) => void
   }): void
   requestAsync(params: {

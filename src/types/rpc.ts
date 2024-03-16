@@ -118,15 +118,15 @@ export type RpcStateMapping = {
 
 export type RpcAccountStateOverride = {
   /** Fake balance to set for the account before executing the call. <32 bytes */
-  balance?: Hex
+  balance?: Hex | undefined
   /** Fake nonce to set for the account before executing the call. <8 bytes */
-  nonce?: Hex
+  nonce?: Hex | undefined
   /** Fake EVM bytecode to inject into the account before executing the call. */
-  code?: Hex
+  code?: Hex | undefined
   /** Fake key-value mapping to override all slots in the account storage before executing the call. */
-  state?: RpcStateMapping
+  state?: RpcStateMapping | undefined
   /** Fake key-value mapping to override individual slots in the account storage before executing the call. */
-  stateDiff?: RpcStateMapping
+  stateDiff?: RpcStateMapping | undefined
 }
 
 export type RpcStateOverride = {

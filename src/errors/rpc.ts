@@ -76,13 +76,13 @@ export class ProviderRpcError<
 > extends RpcError<ProviderRpcErrorCode> {
   override name = 'ProviderRpcError'
 
-  data?: T
+  data?: T | undefined
 
   constructor(
     cause: Error,
     options: Prettify<
       RpcErrorOptions<ProviderRpcErrorCode> & {
-        data?: T
+        data?: T | undefined
       }
     >,
   ) {

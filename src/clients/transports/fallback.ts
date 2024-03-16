@@ -198,13 +198,13 @@ export function rankTransports({
   transports,
   weights = {},
 }: {
-  chain?: Chain
+  chain?: Chain | undefined
   interval: RankOptions['interval']
   onTransports: (transports: Transport[]) => void
-  sampleCount?: RankOptions['sampleCount']
-  timeout?: RankOptions['timeout']
+  sampleCount?: RankOptions['sampleCount'] | undefined
+  timeout?: RankOptions['timeout'] | undefined
   transports: Transport[]
-  weights?: RankOptions['weights']
+  weights?: RankOptions['weights'] | undefined
 }) {
   const { stability: stabilityWeight = 0.7, latency: latencyWeight = 0.3 } =
     weights

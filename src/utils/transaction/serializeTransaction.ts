@@ -94,7 +94,7 @@ export function serializeTransaction<
   _transactionType extends TransactionType = GetTransactionType<transaction>,
 >(
   transaction: transaction,
-  signature?: Signature,
+  signature?: Signature | undefined,
 ): SerializedTransactionReturnType<transaction, _transactionType> {
   const type = getTransactionType(transaction) as GetTransactionType
 
